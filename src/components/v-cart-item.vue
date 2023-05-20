@@ -3,7 +3,7 @@
 
 
     <div class="v-cart-item__info">
-      <img :src="require('../assets/images/' + cart_item_data.image)" alt="">
+      <img class="v-cart-item__image" :src="require('../assets/images/' + cart_item_data.image)" alt="">
       <p>sdsdf</p>
       <p>{{ cart_item_data.name }}</p>
       <p>{{ cart_item_data.price }}</p>
@@ -11,8 +11,9 @@
 
     </div>
     <div class="v-cart-item__quantity">
-
-      <button>Удалить</button>
+      <p>Количество:</p>
+      {{ cart_item_data.quantity }}
+      <button @click="deleteFromCart">Удалить</button>
     </div>
 
   </div>
@@ -33,8 +34,13 @@ export default {
   data() {
     return {}
   },
-  mounted() { },
-  methods: {}
+  
+  methods: {
+    deleteFromCart() {
+      this.$emit('deleteFromCart')
+    }
+  },
+  
 }
 </script>
 
@@ -44,10 +50,14 @@ export default {
   flex-wrap: nowrap;
   justify-content: space-between;
   align-items: center;
+  box-shadow: 0 0 8px 0;
+  padding: $padding*2;
+  margin-bottom: $margin*2;
+  &__image {
+    width: 200px;
+  }
+
 }
 
-.v-cart-item img {
-  width: 200px;
 
-}
 </style>
