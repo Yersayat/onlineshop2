@@ -12,7 +12,12 @@
     </div>
     <div class="v-cart-item__quantity">
       <p>Количество:</p>
-      {{ cart_item_data.quantity }}
+      <span>
+        <span class="quantity__btn" @click="decrementItem">-</span> <!-- 1st -->
+        {{ cart_item_data.quantity }}
+        <span class="quantity__btn" @click="incrementItem">+</span>
+      </span>
+      
       <button @click="deleteFromCart">Удалить</button>
     </div>
 
@@ -20,6 +25,9 @@
 </template>
 
 <script>
+
+ // 4th action ->> v-cart.vue
+
 export default {
   name: 'v-cart-item',
   components: {},
@@ -36,10 +44,20 @@ export default {
   },
   
   methods: {
+   
+    incrementItem() { //new add 2nd -> store.js
+      this.$emit('increment')
+},
+    decrementItem() { //new add
+      this.$emit('decrement')
+},
+    
     deleteFromCart() {
       this.$emit('deleteFromCart')
     }
   },
+
+  
   
 }
 </script>
@@ -55,6 +73,10 @@ export default {
   margin-bottom: $margin*2;
   &__image {
     width: 200px;
+  }
+
+  .quantity__btn {
+    cursor: pointer;
   }
 
 }
